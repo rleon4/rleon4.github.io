@@ -152,25 +152,19 @@ function setup() {
         document.querySelector('.default-player').style.display = 'block';
     }
 }
-
 function draw() {
     background('#0d335f');
-
     if (!song || !song.isPlaying()) {
       return;
     }
-
     let level = amplitude.getLevel();
     let size = map(level, 0, 1, 0.5, 1.5); // Escala de la mida de la forma
-
     let spectrum = fft.analyze();
     let bass = fft.getEnergy("bass");
     let treble = fft.getEnergy("treble");
-
     let r = map(bass, 0, 255, 50, 255);
     let b = map(treble, 0, 255, 50, 255);
     let g = map(level, 0, 1, 50, 255);
-
     //noFill();
     //stroke(r, g, b);
     //strokeWeight(3);
