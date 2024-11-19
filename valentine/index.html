@@ -10,7 +10,7 @@
 }
 .container-fluid {
     max-width: 100%; /* Assegura que la navbar ocupa tota l'amplada */
-}    
+}  
     .navbar {
     padding-left: 0; /* Elimina el padding esquerra de la navbar */
 }
@@ -22,7 +22,10 @@
     display: flex;
     align-items: center;
 }
+
+
 }
+
 .brand-text {
     white-space: nowrap; /* Això assegura que el text no es trenqui en múltiples línies */
     font-size: 1.25rem; /* Ajusta la mida de la font si és necessari */
@@ -40,7 +43,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
        <a class="navbar-brand d-flex align-items-center" href="#">
-    <img src="logo.png" alt="Logo" width="50" class="logo">
+    <img src="https://abejaran4.github.io/logo.png" alt="Logo" width="50" class="logo">
     <span class="brand-text">Web de Roberto</span>
 </a>
 
@@ -51,7 +54,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://rleon4.github.io">Inici</a>
+                    <a class="nav-link" href="#">Inici</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Tema 1</a>
@@ -60,9 +63,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">Projectes</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="https://rleon4.github.io/aliment">Ecològic?</a>
-                        <a class="dropdown-item" href="https://rleon4.github.io/coldplay">Coldplay</a>
-                        <a class="dropdown-item" href="https://rleon4.github.io/moonmusic">Moonmusic</a>
+                          <a class="dropdown-item" href="https://rleon4.github.io/aliment">Ecològic?</a>
+                            <a class="dropdown-item" href="https://rleon4.github.io/coldplay">Coldplay</a>
+                        <a class="dropdown-item" href="https://rleon4.github.io/moonmusic">Moon music</a>
                         <a class="dropdown-item" href="https://rleon4.github.io/valentine">Valentine</a>
                     </div>
                 </li>
@@ -76,13 +79,14 @@
 
 <!-- Contingut principal -->
 <div class="content-container">
-    <h1>Benvinguts</h1>
-    <p>Em dic Roberto i sóc alumne del curs 4B de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
+    <h1>Màquina Jean Valentine</h1>
+    <p>Durant la <a href="https://setmanaciencia.fundaciorecerca.cat/frontend/detall_activitat.asp?ID=6895">Setmana de la Ciència de 2024 </a> organitzada pel Departament d'Universitats s'ha celebrat el centenari del naixement de Jean Valentine.</p>
+ <p><a href="https://en.wikipedia.org/wiki/Jean_Valentine">Jean Valentine</a> va treballar durant la Segona Guerra Mundial creant una màquina per desxifrar els missatges de guerra alemanys</p> 
+      <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'Institut Pompeu Fabra</a></p>
     <p>A continuació veuràs un llistat amb diferents projectes que farem durant el curs:</p>
     <ul>
-           <li>Aliments ecològics i convencionals amb JAVASCRIPTC++.</li>
         <li>Creació d'una obra d'art geomètrica interactiva que reaccioni a la meva veu a través d'un micròfon i a diferents tecles del teclat, al ratolí, que faci moviments repetitius amb sin i cos, moviments aleatoris amb random... Utilitzarem p5.js.</li>
-     
+        <li>Aliments ecològics i convencionals amb C++.</li>
         <li>Contaminació atmosfèrica d'una ciutat catalana amb R.</li> 
     </ul>
 </div>
@@ -91,6 +95,5 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-
 </body>
 </html>
