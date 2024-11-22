@@ -76,7 +76,15 @@
 
 <!-- Contingut principal -->
 <div class="content-container">
-    <h1>Benvinguts</h1>
+    <h1>Explicació del codi</h1>
+    <pre><code>
+        let fft;//crea espai a la memoria anomenat fft
+        fft=new p5.FF();//crea objecte
+        let bass=fft.getEmergy("bass")//crea variable greu
+        let treble=fft.getEnergy("treble")//crea variable aguda
+        let r=map(bass,0,255,50,255);//crea vermell
+        let g=map(treble),0,255,50,255);//crea color verd
+    </code></pre>
     <p>Em dic Roberto i sóc alumne del curs 4B de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
     <p>A continuació veuràs un llistat amb diferents projectes que farem durant el curs:</p>
     <ul>
