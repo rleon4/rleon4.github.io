@@ -79,11 +79,22 @@
     <h1>Explicació del codi</h1>
     <pre><code>
         let fft;//crea espai a la memoria anomenat fft
-        fft=new p5.FF();//crea objecte
+        fft=new p5.FF();//crea objecte de la classe fft que te totes les caracterisiques duna fransformada de fourie rapida
+        //let Roberto; crearia un espai a la memoria der a un objecte anomenat Roberto.
+        //Robero=new Homosapiens(); crearia un objecte de la clase homosapiens amb totoes les seves caracteristiques
+        //per exemple el metode getEnergy() faria la caracteristica humana de menjar
+        //si vull fer menjar al Roberto he d'escriure Roberto.getEnery(); aixo es diu el metode del punt, que al posar un punt
+        //aplico un metode, per fer-lo estudiar Roberto.study(). Study i getEnergy son metodes de la classe Homosapiens
         let bass=fft.getEmergy("bass")//crea variable greu
+        //getEnergy("bass") calcula la eergia de otes las frequencies gereus i dona un numero entre 0 i 255 
+        // i el guarda en una variable anomenada bass
         let treble=fft.getEnergy("treble")//crea variable aguda
+        //calcula la energia de tdotes les frequencies agudes i ens do un numero entre 0 i 250 i el guardes en trebel
         let r=map(bass,0,255,50,255);//crea vermell
+        //converteix els sons aquts en tons vermellosos perque l'hem anomenat r e red, aramateix no es un color, es un numero pero quan faci fill(e,0,0); donaratons vermellosos perque el fill omple de color
+        //si poses fill(bass,0,0); també funcionaria perque el bass va entre 0 i 255 i el color també
         let g=map(treble),0,255,50,255);//crea color verd
+        /7fem u truc de mapejar els valors petits de bass a avalorsuna mica mes grans de r canviant el 0 per 50.
     </code></pre>
     <p>Em dic Roberto i sóc alumne del curs 4B de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
     <p>A continuació veuràs un llistat amb diferents projectes que farem durant el curs:</p>
