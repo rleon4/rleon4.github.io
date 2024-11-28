@@ -4,63 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coldplay Student Videos 2</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
-  
-
 </head>
 <body>
-  <h1>Videos from Coding students</h1>
-    <!-- Video 1 -->
+  <h1>My video</h1>
+    <!-- Video Roberto -->
     <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod1.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <!-- Video 2 -->
-    <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod2.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <!-- Video 3 -->
-    <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod3.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-      <!-- Video 4 -->
-    <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod4.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-      <!-- Video 5 -->
-    <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod5.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
+      <video controls poster="" data-src="videoaleix.mp4"> <!-- la paraula video introduiex un video;
+ la paraula controls introdueix el play, el stop;
+la paraula poster introdueix una imatge que sortiria enganxada a sobre del video al principi, per exemple,
+poster="imatge.png" seria un a imatge nova
+que sortiria al principi del video(només he de pujar aquesta imatge).Per últim data-src significa la font
+(source=data-src)que conté el nom del video.
+Dintre de l'etiqueta<video> puc posar el mateix que a l'etiqueta <img>, es a dir, width que signifca 
+amplada en pixels i height que sign ifica altura en pixels.
+Quins valors pot tenir un video? Depenent de la resolució de la pantalla, per exemple, una pantalla 
+HD(alta definició) té 1280 pixels x 720 pixels 
+(s'escriuria<video width="1280" height="720" controls poster="" data-src="videoaleix.mp4">).Altres resolucions
+ són SD(resolució estàndar o standard definition que inclou 640x480 pixels, 480x360 i 426x240 pixels). 
+Hi ha la full HD que és de 1080 pixels d'alçada. Quant seria l'amplada? Tindrà la mateixa proporció que la HD,
+108O d'alçada multiplicat per la proporció(1280 dividit per 720=1,777), és a dir 1920 pixels.Per últim, la resolució 4K és el ultra HD,
+que té 2160 pixels d'alçada, quant té d'amplada? 3.840 que és igual a 2160x1,777. Quin tamany té un pixel en una pantalla?
+Per saber el tamany d'un pixel en una pantalla he de saber el tamany de la pantalla en mil.limètres i el número de pixels
+que té.
+La pantalla 4K té 2160x3840=8.294.400 pixels.
 
-  <!-- Video 6 -->
-    <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod6.mp4">
         Your browser does not support the video tag.
       </video>
     </div>
- <!-- Video 7 -->
-    <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod7.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-     <!-- Video 8 -->
-    <div class="video-item">
-      <video class="lazy-video" controls poster="" data-src="/videos/videod8.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    
   </div>
-  <script src="../assets/js/lazyload.js"></script>
 </body>
 </html>
