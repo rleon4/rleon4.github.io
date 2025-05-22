@@ -1,12 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
   <meta charset="UTF-8">
   <title>Art Geomètric Amb Expressió Facial</title>
   <!-- Llibreria p5.js per fer gràfics interactius -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.js">
+function strokeVar(r, g, b) {
+  stroke(
+    constrain(r + int(random(-30, 30)), 0, 255),
+    constrain(g + int(random(-30, 30)), 0, 255),
+    constrain(b + int(random(-30, 30)), 0, 255)
+  );
+}
+function fillVar(r, g, b) {
+  fill(
+    constrain(r + int(random(-30, 30)), 0, 255),
+    constrain(g + int(random(-30, 30)), 0, 255),
+    constrain(b + int(random(-30, 30)), 0, 255)
+  );
+}
+
+</script>
   <!-- Llibreria ml5.js per reconeixement facial amb machine learning -->
-  <script src="https://cdn.jsdelivr.net/gh/ml5js/Intro-ML-Arts-IMA@ml5-build-10-7-19/ml5_build/ml5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/ml5js/Intro-ML-Arts-IMA@ml5-build-10-7-19/ml5_build/ml5.min.js">
+function strokeVar(r, g, b) {
+  stroke(
+    constrain(r + int(random(-30, 30)), 0, 255),
+    constrain(g + int(random(-30, 30)), 0, 255),
+    constrain(b + int(random(-30, 30)), 0, 255)
+  );
+}
+function fillVar(r, g, b) {
+  fill(
+    constrain(r + int(random(-30, 30)), 0, 255),
+    constrain(g + int(random(-30, 30)), 0, 255),
+    constrain(b + int(random(-30, 30)), 0, 255)
+  );
+}
+
+</script>
   <style>
     /* Estil general del cos de la pàgina */
     body {
@@ -133,8 +166,7 @@
 
       // Mostra el text amb l'expressió dominant (fora de transformacions)
       noStroke();
-      let r = constrain(44 + int(random(-30, 30)), 0, 255); let g = constrain(169 + int(random(-30, 30)), 0, 255); let b = constrain(225 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b);
+      fillVar(44, 169, 225);
       textSize(32);
       textAlign(CENTER, TOP);
       text("Expressió: " + dominant, width / 2, 10);
@@ -152,8 +184,7 @@ stroke(r, g, b);
 
       switch (dominant) {
         case 'happy':
-          let r = constrain(254 + int(random(-30, 30)), 0, 255); let g = constrain(130 + int(random(-30, 30)), 0, 255); let b = constrain(34 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // tronja
+          strokeVar(254, 130, 34); // tronja
           beginShape();//cara
 vertex(283 + random(-1, 1), 63.1875 + random(-1, 1));
 vertex(282 + random(-1, 1), 63.1875 + random(-1, 1));
@@ -411,8 +442,7 @@ vertex(287 + random(-1, 1), 64.1875 + random(-1, 1));
 vertex(285 + random(-1, 1), 64.1875 + random(-1, 1));
 vertex(282 + random(-1, 1), 64.1875 + random(-1, 1));
 endShape(CLOSE);
-          let r = constrain(254 + int(random(-30, 30)), 0, 255); let g = constrain(130 + int(random(-30, 30)), 0, 255); let b = constrain(34 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // tronja
+          strokeVar(254, 130, 34); // tronja
           beginShape();//ceja derecha
 vertex(266 + random(-1, 1), 82.1875 + random(-1, 1));
 vertex(267 + random(-1, 1), 82.1875 + random(-1, 1));
@@ -460,8 +490,7 @@ vertex(263 + random(-1, 1), 82.1875 + random(-1, 1));
 vertex(265 + random(-1, 1), 82.1875 + random(-1, 1));
 vertex(267 + random(-1, 1), 82.1875 + random(-1, 1));
 endShape(CLOSE);
-          let r = constrain(254 + int(random(-30, 30)), 0, 255); let g = constrain(130 + int(random(-30, 30)), 0, 255); let b = constrain(34 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // tronja
+          strokeVar(254, 130, 34); // tronja
           beginShape();//ceja izquierda
 vertex(307 + random(-1, 1), 82.1875 + random(-1, 1));
 vertex(309 + random(-1, 1), 81.1875 + random(-1, 1));
@@ -501,8 +530,7 @@ vertex(308 + random(-1, 1), 79.1875 + random(-1, 1));
 vertex(308 + random(-1, 1), 80.1875 + random(-1, 1));
 vertex(306 + random(-1, 1), 81.1875 + random(-1, 1));
 endShape(CLOSE);
-           let r = constrain(0 + int(random(-30, 30)), 0, 255); let g = constrain(0 + int(random(-30, 30)), 0, 255); let b = constrain(0 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // negre
+           strokeVar(0, 0, 0); // negre
           beginShape();//sombrero
 vertex(247 + random(-1, 1), 70.1875 + random(-1, 1));
 vertex(246 + random(-1, 1), 70.1875 + random(-1, 1));
@@ -710,10 +738,8 @@ vertex(342 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(343 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(347 + random(-1, 1), 55.1875 + random(-1, 1));
 endShape(CLOSE);
-         let r = constrain(231 + int(random(-30, 30)), 0, 255); let g = constrain(182 + int(random(-30, 30)), 0, 255); let b = constrain(69 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // tronja poma
-          let r = constrain(231 + int(random(-30, 30)), 0, 255); let g = constrain(182 + int(random(-30, 30)), 0, 255); let b = constrain(69 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // tronja poma
+         fillVar(231, 182, 69); // tronja poma
+          strokeVar(231, 182, 69); // tronja poma
           beginShape();//manzana de la cara
 vertex(269 + random(-1, 1), 90.1875 + random(-1, 1));
 vertex(267 + random(-1, 1), 95.1875 + random(-1, 1));
@@ -1217,8 +1243,7 @@ vertex(303.40000915527344 + random(-1, 1), 74.76250076293945 + random(-1, 1));
 vertex(303.40000915527344 + random(-1, 1), 74.76250076293945 + random(-1, 1));
 vertex(306.40000915527344 + random(-1, 1), 74.76250076293945 + random(-1, 1));
 endShape(CLOSE);
-           let r = constrain(0 + int(random(-30, 30)), 0, 255); let g = constrain(0 + int(random(-30, 30)), 0, 255); let b = constrain(0 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // negre
+           strokeVar(0, 0, 0); // negre
           beginShape();//sombrero
 vertex(247 + random(-1, 1), 70.1875 + random(-1, 1));
 vertex(246 + random(-1, 1), 70.1875 + random(-1, 1));
@@ -1426,10 +1451,8 @@ vertex(342 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(343 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(347 + random(-1, 1), 55.1875 + random(-1, 1));
 endShape(CLOSE);
-         let r = constrain(30 + int(random(-30, 30)), 0, 255); let g = constrain(20 + int(random(-30, 30)), 0, 255); let b = constrain(234 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // blau fort
-          let r = constrain(30 + int(random(-30, 30)), 0, 255); let g = constrain(20 + int(random(-30, 30)), 0, 255); let b = constrain(234 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // blau fort
+         fillVar(30, 20, 234); // blau fort
+          strokeVar(30, 20, 234); // blau fort
           beginShape();//manzana de la cara
 vertex(286.1999969482422 + random(-1, 1), 82.5625 + random(-1, 1));
 vertex(286.1999969482422 + random(-1, 1), 82.5625 + random(-1, 1));
@@ -1981,8 +2004,7 @@ vertex(332 + random(-1, 1), 74.9625015258789 + random(-1, 1));
 vertex(332 + random(-1, 1), 74.9625015258789 + random(-1, 1));
 vertex(331 + random(-1, 1), 74.9625015258789 + random(-1, 1));
 endShape(CLOSE);
-          let r = constrain(0 + int(random(-30, 30)), 0, 255); let g = constrain(0 + int(random(-30, 30)), 0, 255); let b = constrain(0 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // negre
+          strokeVar(0, 0, 0); // negre
           beginShape();//sombrero
 vertex(247 + random(-1, 1), 70.1875 + random(-1, 1));
 vertex(246 + random(-1, 1), 70.1875 + random(-1, 1));
@@ -2190,10 +2212,8 @@ vertex(342 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(343 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(347 + random(-1, 1), 55.1875 + random(-1, 1));
 endShape(CLOSE);
-         let r = constrain(169 + int(random(-30, 30)), 0, 255); let g = constrain(2 + int(random(-30, 30)), 0, 255); let b = constrain(22 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // vermell fort
-          let r = constrain(169 + int(random(-30, 30)), 0, 255); let g = constrain(2 + int(random(-30, 30)), 0, 255); let b = constrain(22 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // vermell fort
+         fillVar(169, 2, 22); // vermell fort
+          strokeVar(169, 2, 22); // vermell fort
           beginShape();//manzana de la cara
 vertex(293.1999969482422 + random(-1, 1), 82.16250228881836 + random(-1, 1));
 vertex(292.1999969482422 + random(-1, 1), 82.16250228881836 + random(-1, 1));
@@ -2415,8 +2435,7 @@ endShape(CLOSE);
           break;
 
         case 'surprised':
-          let r = constrain(233 + int(random(-30, 30)), 0, 255); let g = constrain(236 + int(random(-30, 30)), 0, 255); let b = constrain(79 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // groc fluix
+          strokeVar(233, 236, 79); // groc fluix
           beginShape();//cara
 vertex(283 + random(-1, 1), 63.1875 + random(-1, 1));
 vertex(282 + random(-1, 1), 63.1875 + random(-1, 1));
@@ -2674,8 +2693,7 @@ vertex(287 + random(-1, 1), 64.1875 + random(-1, 1));
 vertex(285 + random(-1, 1), 64.1875 + random(-1, 1));
 vertex(282 + random(-1, 1), 64.1875 + random(-1, 1));
 endShape(CLOSE);
-          let r = constrain(233 + int(random(-30, 30)), 0, 255); let g = constrain(236 + int(random(-30, 30)), 0, 255); let b = constrain(79 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // groc fluix
+          strokeVar(233, 236, 79); // groc fluix
           beginShape();//ceja derecha
 vertex(265.0138883590698 + random(-1, 1), 81.40624237060547 + random(-1, 1));
 vertex(266.0138883590698 + random(-1, 1), 79.40624237060547 + random(-1, 1));
@@ -2706,8 +2724,7 @@ vertex(269.0138883590698 + random(-1, 1), 80.40624237060547 + random(-1, 1));
 vertex(267.0138883590698 + random(-1, 1), 82.40624237060547 + random(-1, 1));
 vertex(263.0138883590698 + random(-1, 1), 81.40624237060547 + random(-1, 1));
 endShape(CLOSE);
-          let r = constrain(233 + int(random(-30, 30)), 0, 255); let g = constrain(236 + int(random(-30, 30)), 0, 255); let b = constrain(79 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // groc fluix
+          strokeVar(233, 236, 79); // groc fluix
           beginShape();//ceja izquierda
 vertex(330.0138883590698 + random(-1, 1), 83.51736068725586 + random(-1, 1));
 vertex(328.0138883590698 + random(-1, 1), 81.51736068725586 + random(-1, 1));
@@ -2741,8 +2758,7 @@ vertex(325.0138883590698 + random(-1, 1), 77.51736068725586 + random(-1, 1));
 vertex(329.0138883590698 + random(-1, 1), 80.51736068725586 + random(-1, 1));
 vertex(330.0138883590698 + random(-1, 1), 83.51736068725586 + random(-1, 1));
 endShape(CLOSE);
-          let r = constrain(0 + int(random(-30, 30)), 0, 255); let g = constrain(0 + int(random(-30, 30)), 0, 255); let b = constrain(0 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // negro
+          strokeVar(0, 0, 0); // negro
           beginShape();//sombrero
 vertex(247 + random(-1, 1), 70.1875 + random(-1, 1));
 vertex(246 + random(-1, 1), 70.1875 + random(-1, 1));
@@ -2950,10 +2966,8 @@ vertex(342 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(343 + random(-1, 1), 55.1875 + random(-1, 1));
 vertex(347 + random(-1, 1), 55.1875 + random(-1, 1));
 endShape(CLOSE);
-         let r = constrain(242 + int(random(-30, 30)), 0, 255); let g = constrain(228 + int(random(-30, 30)), 0, 255); let b = constrain(53 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // groc 
-          let r = constrain(242 + int(random(-30, 30)), 0, 255); let g = constrain(228 + int(random(-30, 30)), 0, 255); let b = constrain(53 + int(random(-30, 30)), 0, 255);
-stroke(r, g, b); // groc 
+         fillVar(242, 228, 53); // groc 
+          strokeVar(242, 228, 53); // groc 
           beginShape();//manzana de la cara
 vertex(293 + random(-1, 1), 81.171875 + random(-1, 1));
 vertex(290 + random(-1, 1), 81.171875 + random(-1, 1));
@@ -3140,6 +3154,22 @@ endShape(CLOSE);
           endShape(CLOSE);
       }
     }
-  </script>
+  
+function strokeVar(r, g, b) {
+  stroke(
+    constrain(r + int(random(-30, 30)), 0, 255),
+    constrain(g + int(random(-30, 30)), 0, 255),
+    constrain(b + int(random(-30, 30)), 0, 255)
+  );
+}
+function fillVar(r, g, b) {
+  fill(
+    constrain(r + int(random(-30, 30)), 0, 255),
+    constrain(g + int(random(-30, 30)), 0, 255),
+    constrain(b + int(random(-30, 30)), 0, 255)
+  );
+}
+
+</script>
 </body>
 </html>
