@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -46,7 +44,7 @@ function fillVar(r, g, b) {
     body {
       margin: 0; /* sense marges externs */
       padding: 0; /* sense espais interns */
-      background-color: rgb(39, 33, 12); /* color de fons gris clar */
+      background-color: #f4f4f4; /* color de fons gris clar */
       display: flex; /* fa servir flexbox per alinear */
       justify-content: center; /* centra horitzontalment */
       align-items: center; /* centra verticalment */
@@ -99,8 +97,6 @@ function fillVar(r, g, b) {
     // Variables globals
     let faceapi, detections = [], video;
     let modelsMostrats = false;
-let angle = 0;
-
 
     // Mida virtual que es manté proporcional a qualsevol pantalla
     const VIRTUAL_W = 1200;
@@ -164,8 +160,7 @@ let angle = 0;
       push(); // desa l'estat de transformació
       translate(offsetX, offsetY); // desplaça l'origen
       scale(scaleFactor); // redimensiona proporcionalment
-      drawArt(dominant, intensity);
-      pop(); // dibuixa la figura segons l'expressió
+      drawArt(dominant, intensity); // dibuixa la figura segons l'expressió
       pop(); // recupera l'estat anterior
 
       // Mostra el text amb l'expressió dominant (fora de transformacions)
@@ -183,30 +178,11 @@ let angle = 0;
 
     // Dibuixa diferents figures depenent de l'estat emocional
     function drawArt(dominant, intensity) {
-
-      push();
-      if (dominant === 'happy') {
-        translate(300 + cos(frameCount * 0.1) * 30, 100 + sin(frameCount * 0.1) * 30);
-      } else if (dominant === 'sad') {
-        translate(300, 100 + sin(frameCount * 0.1) * 20);
-      } else if (dominant === 'angry') {
-        translate(300 + random(-30, 30), 100 + random(-30, 30));
-      } else if (dominant === 'surprised') {
-        scale(1 + sin(frameCount * 0.1) * 0.2);
-      } else if (dominant === 'fearful') {
-        rotate(sin(frameCount * 0.05));
-      } else if (dominant === 'disgusted') {
-        shearX(sin(frameCount * 0.05) * 0.5);
-      } else {
-        translate(300, 100);
-      }
-
       noFill();
       strokeWeight(4);
 
       switch (dominant) {
         case 'happy':
-          fill(255, 220, 180);
           strokeVar(254, 130, 34); // tronja
           beginShape();//cara
 vertex(283 + random(-1, 1), 63.1875 + random(-1, 1));
@@ -466,7 +442,6 @@ vertex(285 + random(-1, 1), 64.1875 + random(-1, 1));
 vertex(282 + random(-1, 1), 64.1875 + random(-1, 1));
 endShape(CLOSE);
           strokeVar(254, 130, 34); // tronja
-          fill(0);
           beginShape();//ceja derecha
 vertex(266 + random(-1, 1), 82.1875 + random(-1, 1));
 vertex(267 + random(-1, 1), 82.1875 + random(-1, 1));
@@ -515,7 +490,6 @@ vertex(265 + random(-1, 1), 82.1875 + random(-1, 1));
 vertex(267 + random(-1, 1), 82.1875 + random(-1, 1));
 endShape(CLOSE);
           strokeVar(254, 130, 34); // tronja
-          fill(0);
           beginShape();//ceja izquierda
 vertex(307 + random(-1, 1), 82.1875 + random(-1, 1));
 vertex(309 + random(-1, 1), 81.1875 + random(-1, 1));
@@ -904,103 +878,7 @@ vertex(270 + random(-1, 1), 89.1875 + random(-1, 1));
 endShape(CLOSE);
           break;
 
-        case 'fearful':
-          fill(200, 200, 255);
-          stroke(255,182,193,150); // rosa pàl·lid
-          fill(255,228,225); // cara rosa clar
-          beginShape(); // cara
-          vertex(283 + random(-1, 1), 63 + random(-1, 1));
-          vertex(260 + random(-1, 1), 64 + random(-1, 1));
-          vertex(240 + random(-1, 1), 66 + random(-1, 1));
-          vertex(250 + random(-1, 1), 86 + random(-1, 1));
-          vertex(275 + random(-1, 1), 90 + random(-1, 1));
-          vertex(290 + random(-1, 1), 88 + random(-1, 1));
-          endShape(CLOSE);
-
-          fill(0); // color negre per a facials
-          fill(0);
-          beginShape(); // ulls grans
-          ellipse(265, 75, 10, 14);
-          ellipse(285, 75, 10, 14);
-          endShape();
-
-          fill(0);
-          beginShape(); // boca ovalada oberta
-          ellipse(275, 90, 20, 12);
-          endShape();
-
-          beginShape(); // celles arquejades
-          line(260, 65, 268, 60);
-          line(282, 60, 290, 65);
-          endShape();
-          break;
-
-        case 'disgusted':
-          fill(180, 255, 180);
-          stroke(0,150,0,150); // verd
-          fill(144,238,144); // verd clar
-          beginShape(); // cara
-          vertex(280 + random(-1, 1), 60 + random(-1, 1));
-          vertex(250 + random(-1, 1), 65 + random(-1, 1));
-          vertex(245 + random(-1, 1), 85 + random(-1, 1));
-          vertex(265 + random(-1, 1), 92 + random(-1, 1));
-          vertex(285 + random(-1, 1), 88 + random(-1, 1));
-          endShape(CLOSE);
-
-          fill(0); // color negre per facials
-          ellipse(260, 75, 8, 6);
-          ellipse(280, 75, 8, 6);
-          arc(270, 85, 20, 10, PI, TWO_PI); // boca corba avall
-
-          line(258, 65, 268, 68); // celles fruncides
-          line(275, 68, 285, 65);
-          break;
-
-        case 'surprised':
-          fill(255, 255, 180);
-          stroke(0,150,255,150); // blau clar
-          fill(173,216,230); // blau suau
-          beginShape(); // cara
-          vertex(270, 60);
-          vertex(250, 65);
-          vertex(245, 85);
-          vertex(270, 95);
-          vertex(295, 85);
-          vertex(290, 65);
-          endShape(CLOSE);
-
-          fill(0);
-          ellipse(260, 75, 10, 14); // ulls grans
-          ellipse(280, 75, 10, 14);
-          ellipse(270, 88, 12, 16); // boca sorpresa
-          line(258, 65, 268, 60); // celles arquejades
-          line(278, 60, 288, 65);
-          break;
-
-        case 'neutral':
-          fill(230);
-          stroke(150,150,150,150); // gris
-          fill(200,200,200); // gris clar
-          beginShape(); // cara
-          vertex(260, 65);
-          vertex(250, 75);
-          vertex(260, 90);
-          vertex(280, 90);
-          vertex(290, 75);
-          vertex(280, 65);
-          endShape(CLOSE);
-
-          fill(0);
-          ellipse(265, 75, 6, 6);
-          ellipse(275, 75, 6, 6);
-          rect(268, 85, 14, 2); // boca recta
-          line(262, 68, 268, 68); // celles planes
-          line(272, 68, 278, 68);
-          break;
-
-
         case 'sad':
-          fill(180, 200, 255);
           stroke(50,100,200,150); // blau
          beginShape();//cara
 vertex(283 + random(-1, 1), 63.1875 + random(-1, 1));
@@ -1260,7 +1138,6 @@ vertex(285 + random(-1, 1), 64.1875 + random(-1, 1));
 vertex(282 + random(-1, 1), 64.1875 + random(-1, 1));
 endShape(CLOSE);
           stroke(50,100,200,150); //blau
-          fill(0);
           beginShape();//ceja derecha
 vertex(264 + random(-1, 1), 86.16666412353516 + random(-1, 1));
 vertex(264 + random(-1, 1), 86.16666412353516 + random(-1, 1));
@@ -1317,7 +1194,6 @@ vertex(261 + random(-1, 1), 87.16666412353516 + random(-1, 1));
 vertex(262 + random(-1, 1), 87.16666412353516 + random(-1, 1));
 endShape(CLOSE);
           stroke(50,100,200,150); //blau
-          fill(0);
           beginShape();//ceja izquierda
 vertex(306.40000915527344 + random(-1, 1), 75.76250076293945 + random(-1, 1));
 vertex(307.40000915527344 + random(-1, 1), 76.76250076293945 + random(-1, 1));
@@ -1780,7 +1656,6 @@ endShape(CLOSE);
           break;
 
         case 'angry':
-          fill(255, 180, 180);
           stroke(200,0,0,150); // vermell
           beginShape();//cara
 vertex(283 + random(-1, 1), 63.1875 + random(-1, 1));
@@ -2040,7 +1915,6 @@ vertex(285 + random(-1, 1), 64.1875 + random(-1, 1));
 vertex(282 + random(-1, 1), 64.1875 + random(-1, 1));
 endShape(CLOSE);
           stroke(200,0,0,150); // vermell
-          fill(0);
           beginShape();//ceja derecha
 vertex(262.8000030517578 + random(-1, 1), 76.36249923706055 + random(-1, 1));
 vertex(263.8000030517578 + random(-1, 1), 76.36249923706055 + random(-1, 1));
@@ -2085,7 +1959,6 @@ vertex(265.8000030517578 + random(-1, 1), 74.36249923706055 + random(-1, 1));
 vertex(262.8000030517578 + random(-1, 1), 74.36249923706055 + random(-1, 1));
 endShape(CLOSE);
           stroke(200,0,0,150); // vermell
-          fill(0);
           beginShape();//ceja izquierda
 vertex(330 + random(-1, 1), 76.9625015258789 + random(-1, 1));
 vertex(330 + random(-1, 1), 76.9625015258789 + random(-1, 1));
@@ -2550,11 +2423,725 @@ vertex(293.1999969482422 + random(-1, 1), 81.16249990463257 + random(-1, 1));
 endShape(CLOSE);
           break;
 
-        
+        case 'fearful':
+          stroke(100,100,100,150); // gris
+          beginShape();
+          for (let x = 0; x <= VIRTUAL_W; x += 10) {
+            let y = VIRTUAL_H/2 + 50 * sin((x - VIRTUAL_W/2) * 0.05) * intensity;
+            vertex(x, y);
+          }
+          endShape();
+          break;
 
-        
+        case 'surprised':
+          strokeVar(233, 236, 79); // groc fluix
+          beginShape();//cara
+vertex(283 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(282 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(280 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(278 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(277 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(274 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(273 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(271 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(270 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(268 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(266 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(264 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(263 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(261 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(260 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(258 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(256 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(254 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(252 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(252 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(251 + random(-1, 1), 66.1875 + random(-1, 1));
+vertex(250 + random(-1, 1), 66.1875 + random(-1, 1));
+vertex(250 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(249 + random(-1, 1), 68.1875 + random(-1, 1));
+vertex(249 + random(-1, 1), 69.1875 + random(-1, 1));
+vertex(249 + random(-1, 1), 72.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 74.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 75.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 78.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 79.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 80.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 81.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 80.1875 + random(-1, 1));
+vertex(246 + random(-1, 1), 79.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 77.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 76.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 75.1875 + random(-1, 1));
+vertex(242 + random(-1, 1), 76.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 78.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 79.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 81.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 83.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 84.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 86.1875 + random(-1, 1));
+vertex(242 + random(-1, 1), 87.1875 + random(-1, 1));
+vertex(243 + random(-1, 1), 89.1875 + random(-1, 1));
+vertex(243 + random(-1, 1), 90.1875 + random(-1, 1));
+vertex(243 + random(-1, 1), 92.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 93.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 95.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 96.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 99.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 100.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 101.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 103.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 104.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 105.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 106.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 108.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 110.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 110.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 112.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 113.1875 + random(-1, 1));
+vertex(246 + random(-1, 1), 115.1875 + random(-1, 1));
+vertex(246 + random(-1, 1), 116.1875 + random(-1, 1));
+vertex(246 + random(-1, 1), 117.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 117.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 119.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 119.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 120.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 120.1875 + random(-1, 1));
+vertex(249 + random(-1, 1), 121.1875 + random(-1, 1));
+vertex(250 + random(-1, 1), 120.1875 + random(-1, 1));
+vertex(251 + random(-1, 1), 120.1875 + random(-1, 1));
+vertex(252 + random(-1, 1), 119.1875 + random(-1, 1));
+vertex(252 + random(-1, 1), 119.1875 + random(-1, 1));
+vertex(252 + random(-1, 1), 118.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 118.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 117.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 116.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 115.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 116.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 117.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 118.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 119.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 122.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 122.1875 + random(-1, 1));
+vertex(254 + random(-1, 1), 122.1875 + random(-1, 1));
+vertex(254 + random(-1, 1), 123.1875 + random(-1, 1));
+vertex(254 + random(-1, 1), 124.1875 + random(-1, 1));
+vertex(254 + random(-1, 1), 126.1875 + random(-1, 1));
+vertex(255 + random(-1, 1), 127.1875 + random(-1, 1));
+vertex(256 + random(-1, 1), 130.1875 + random(-1, 1));
+vertex(256 + random(-1, 1), 131.1875 + random(-1, 1));
+vertex(257 + random(-1, 1), 132.1875 + random(-1, 1));
+vertex(257 + random(-1, 1), 134.1875 + random(-1, 1));
+vertex(258 + random(-1, 1), 134.1875 + random(-1, 1));
+vertex(258 + random(-1, 1), 135.1875 + random(-1, 1));
+vertex(258 + random(-1, 1), 137.1875 + random(-1, 1));
+vertex(259 + random(-1, 1), 138.1875 + random(-1, 1));
+vertex(259 + random(-1, 1), 139.1875 + random(-1, 1));
+vertex(260 + random(-1, 1), 140.1875 + random(-1, 1));
+vertex(261 + random(-1, 1), 142.1875 + random(-1, 1));
+vertex(263 + random(-1, 1), 143.1875 + random(-1, 1));
+vertex(264 + random(-1, 1), 144.1875 + random(-1, 1));
+vertex(265 + random(-1, 1), 144.1875 + random(-1, 1));
+vertex(265 + random(-1, 1), 145.1875 + random(-1, 1));
+vertex(266 + random(-1, 1), 146.1875 + random(-1, 1));
+vertex(267 + random(-1, 1), 147.1875 + random(-1, 1));
+vertex(268 + random(-1, 1), 148.1875 + random(-1, 1));
+vertex(268 + random(-1, 1), 149.1875 + random(-1, 1));
+vertex(269 + random(-1, 1), 150.1875 + random(-1, 1));
+vertex(270 + random(-1, 1), 151.1875 + random(-1, 1));
+vertex(271 + random(-1, 1), 152.1875 + random(-1, 1));
+vertex(271 + random(-1, 1), 153.1875 + random(-1, 1));
+vertex(272 + random(-1, 1), 154.1875 + random(-1, 1));
+vertex(273 + random(-1, 1), 155.1875 + random(-1, 1));
+vertex(275 + random(-1, 1), 155.1875 + random(-1, 1));
+vertex(277 + random(-1, 1), 156.1875 + random(-1, 1));
+vertex(278 + random(-1, 1), 157.1875 + random(-1, 1));
+vertex(279 + random(-1, 1), 157.1875 + random(-1, 1));
+vertex(280 + random(-1, 1), 158.1875 + random(-1, 1));
+vertex(281 + random(-1, 1), 159.1875 + random(-1, 1));
+vertex(282 + random(-1, 1), 159.1875 + random(-1, 1));
+vertex(283 + random(-1, 1), 160.1875 + random(-1, 1));
+vertex(284 + random(-1, 1), 160.1875 + random(-1, 1));
+vertex(286 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(287 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(289 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(291 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(292 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(294 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(296 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(298 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(299 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(300 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(302 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(303 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(304 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(305 + random(-1, 1), 162.1875 + random(-1, 1));
+vertex(306 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(308 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(309 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(310 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(310 + random(-1, 1), 161.1875 + random(-1, 1));
+vertex(312 + random(-1, 1), 160.1875 + random(-1, 1));
+vertex(312 + random(-1, 1), 159.1875 + random(-1, 1));
+vertex(313 + random(-1, 1), 159.1875 + random(-1, 1));
+vertex(314 + random(-1, 1), 158.1875 + random(-1, 1));
+vertex(315 + random(-1, 1), 158.1875 + random(-1, 1));
+vertex(317 + random(-1, 1), 157.1875 + random(-1, 1));
+vertex(318 + random(-1, 1), 157.1875 + random(-1, 1));
+vertex(319 + random(-1, 1), 156.1875 + random(-1, 1));
+vertex(320 + random(-1, 1), 156.1875 + random(-1, 1));
+vertex(321 + random(-1, 1), 155.1875 + random(-1, 1));
+vertex(322 + random(-1, 1), 153.1875 + random(-1, 1));
+vertex(324 + random(-1, 1), 152.1875 + random(-1, 1));
+vertex(325 + random(-1, 1), 150.1875 + random(-1, 1));
+vertex(326 + random(-1, 1), 149.1875 + random(-1, 1));
+vertex(327 + random(-1, 1), 148.1875 + random(-1, 1));
+vertex(327 + random(-1, 1), 147.1875 + random(-1, 1));
+vertex(330 + random(-1, 1), 144.1875 + random(-1, 1));
+vertex(330 + random(-1, 1), 143.1875 + random(-1, 1));
+vertex(332 + random(-1, 1), 141.1875 + random(-1, 1));
+vertex(333 + random(-1, 1), 139.1875 + random(-1, 1));
+vertex(333 + random(-1, 1), 138.1875 + random(-1, 1));
+vertex(334 + random(-1, 1), 137.1875 + random(-1, 1));
+vertex(334 + random(-1, 1), 134.1875 + random(-1, 1));
+vertex(335 + random(-1, 1), 132.1875 + random(-1, 1));
+vertex(336 + random(-1, 1), 130.1875 + random(-1, 1));
+vertex(337 + random(-1, 1), 129.1875 + random(-1, 1));
+vertex(337 + random(-1, 1), 128.1875 + random(-1, 1));
+vertex(338 + random(-1, 1), 126.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 125.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 123.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 122.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 119.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 119.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 118.1875 + random(-1, 1));
+vertex(340 + random(-1, 1), 116.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 115.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 115.1875 + random(-1, 1));
+vertex(340 + random(-1, 1), 116.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 117.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 117.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 117.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 115.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 114.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 112.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 110.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 109.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 108.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 107.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 106.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 103.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 102.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 100.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 99.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 98.1875 + random(-1, 1));
+vertex(345 + random(-1, 1), 97.1875 + random(-1, 1));
+vertex(346 + random(-1, 1), 95.1875 + random(-1, 1));
+vertex(346 + random(-1, 1), 93.1875 + random(-1, 1));
+vertex(347 + random(-1, 1), 92.1875 + random(-1, 1));
+vertex(347 + random(-1, 1), 89.1875 + random(-1, 1));
+vertex(347 + random(-1, 1), 87.1875 + random(-1, 1));
+vertex(348 + random(-1, 1), 86.1875 + random(-1, 1));
+vertex(348 + random(-1, 1), 87.1875 + random(-1, 1));
+vertex(348 + random(-1, 1), 86.1875 + random(-1, 1));
+vertex(349 + random(-1, 1), 83.1875 + random(-1, 1));
+vertex(349 + random(-1, 1), 82.1875 + random(-1, 1));
+vertex(350 + random(-1, 1), 80.1875 + random(-1, 1));
+vertex(350 + random(-1, 1), 79.1875 + random(-1, 1));
+vertex(350 + random(-1, 1), 77.1875 + random(-1, 1));
+vertex(350 + random(-1, 1), 77.1875 + random(-1, 1));
+vertex(349 + random(-1, 1), 76.1875 + random(-1, 1));
+vertex(349 + random(-1, 1), 76.1875 + random(-1, 1));
+vertex(347 + random(-1, 1), 76.1875 + random(-1, 1));
+vertex(345 + random(-1, 1), 77.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 79.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 81.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 82.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 82.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 81.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 79.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 77.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 75.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 73.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 71.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 69.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(338 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(336 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(333 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(331 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(328 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(326 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(322 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(318 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(316 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(314 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(311 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(308 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(305 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(302 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(299 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(297 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(294 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(292 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(290 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(287 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(285 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(282 + random(-1, 1), 64.1875 + random(-1, 1));
+endShape(CLOSE);
+          strokeVar(233, 236, 79); // groc fluix
+          beginShape();//ceja derecha
+vertex(265.0138883590698 + random(-1, 1), 81.40624237060547 + random(-1, 1));
+vertex(266.0138883590698 + random(-1, 1), 79.40624237060547 + random(-1, 1));
+vertex(267.0138883590698 + random(-1, 1), 79.40624237060547 + random(-1, 1));
+vertex(268.0138883590698 + random(-1, 1), 78.40624237060547 + random(-1, 1));
+vertex(270.0138883590698 + random(-1, 1), 77.40624237060547 + random(-1, 1));
+vertex(272.0138883590698 + random(-1, 1), 76.40624237060547 + random(-1, 1));
+vertex(273.0138883590698 + random(-1, 1), 76.40624237060547 + random(-1, 1));
+vertex(275.0138883590698 + random(-1, 1), 75.40624237060547 + random(-1, 1));
+vertex(276.0138883590698 + random(-1, 1), 75.40624237060547 + random(-1, 1));
+vertex(277.0138883590698 + random(-1, 1), 74.40624237060547 + random(-1, 1));
+vertex(279.0138883590698 + random(-1, 1), 74.40624237060547 + random(-1, 1));
+vertex(281.0138883590698 + random(-1, 1), 73.40624237060547 + random(-1, 1));
+vertex(282.0138883590698 + random(-1, 1), 73.40624237060547 + random(-1, 1));
+vertex(284.0138883590698 + random(-1, 1), 72.40624237060547 + random(-1, 1));
+vertex(286.0138883590698 + random(-1, 1), 73.40624237060547 + random(-1, 1));
+vertex(286.0138883590698 + random(-1, 1), 75.40624237060547 + random(-1, 1));
+vertex(285.0138883590698 + random(-1, 1), 75.40624237060547 + random(-1, 1));
+vertex(283.0138883590698 + random(-1, 1), 75.40624237060547 + random(-1, 1));
+vertex(282.0138883590698 + random(-1, 1), 75.40624237060547 + random(-1, 1));
+vertex(280.0138883590698 + random(-1, 1), 76.40624237060547 + random(-1, 1));
+vertex(279.0138883590698 + random(-1, 1), 76.40624237060547 + random(-1, 1));
+vertex(276.0138883590698 + random(-1, 1), 78.40624237060547 + random(-1, 1));
+vertex(272.0138883590698 + random(-1, 1), 80.40624237060547 + random(-1, 1));
+vertex(272.0138883590698 + random(-1, 1), 80.40624237060547 + random(-1, 1));
+vertex(272.0138883590698 + random(-1, 1), 80.40624237060547 + random(-1, 1));
+vertex(269.0138883590698 + random(-1, 1), 80.40624237060547 + random(-1, 1));
+vertex(267.0138883590698 + random(-1, 1), 82.40624237060547 + random(-1, 1));
+vertex(263.0138883590698 + random(-1, 1), 81.40624237060547 + random(-1, 1));
+endShape(CLOSE);
+          strokeVar(233, 236, 79); // groc fluix
+          beginShape();//ceja izquierda
+vertex(330.0138883590698 + random(-1, 1), 83.51736068725586 + random(-1, 1));
+vertex(328.0138883590698 + random(-1, 1), 81.51736068725586 + random(-1, 1));
+vertex(327.0138883590698 + random(-1, 1), 81.51736068725586 + random(-1, 1));
+vertex(325.0138883590698 + random(-1, 1), 81.51736068725586 + random(-1, 1));
+vertex(323.0138883590698 + random(-1, 1), 80.51736068725586 + random(-1, 1));
+vertex(322.0138883590698 + random(-1, 1), 80.51736068725586 + random(-1, 1));
+vertex(320.0138883590698 + random(-1, 1), 80.51736068725586 + random(-1, 1));
+vertex(318.0138883590698 + random(-1, 1), 80.51736068725586 + random(-1, 1));
+vertex(313.0138883590698 + random(-1, 1), 78.51736068725586 + random(-1, 1));
+vertex(311.0138883590698 + random(-1, 1), 77.51736068725586 + random(-1, 1));
+vertex(308.0138883590698 + random(-1, 1), 77.51736068725586 + random(-1, 1));
+vertex(306.0138883590698 + random(-1, 1), 75.51736068725586 + random(-1, 1));
+vertex(307.0138883590698 + random(-1, 1), 73.51736068725586 + random(-1, 1));
+vertex(307.0138883590698 + random(-1, 1), 73.51736068725586 + random(-1, 1));
+vertex(307.0138883590698 + random(-1, 1), 73.51736068725586 + random(-1, 1));
+vertex(308.0138883590698 + random(-1, 1), 73.51736068725586 + random(-1, 1));
+vertex(310.0138883590698 + random(-1, 1), 73.51736068725586 + random(-1, 1));
+vertex(312.0138883590698 + random(-1, 1), 74.51736068725586 + random(-1, 1));
+vertex(313.0138883590698 + random(-1, 1), 74.51736068725586 + random(-1, 1));
+vertex(314.0138883590698 + random(-1, 1), 74.51736068725586 + random(-1, 1));
+vertex(317.0138883590698 + random(-1, 1), 74.51736068725586 + random(-1, 1));
+vertex(317.0138883590698 + random(-1, 1), 75.51736068725586 + random(-1, 1));
+vertex(318.0138883590698 + random(-1, 1), 75.51736068725586 + random(-1, 1));
+vertex(320.0138883590698 + random(-1, 1), 75.51736068725586 + random(-1, 1));
+vertex(321.0138883590698 + random(-1, 1), 75.51736068725586 + random(-1, 1));
+vertex(323.0138883590698 + random(-1, 1), 76.51736068725586 + random(-1, 1));
+vertex(323.0138883590698 + random(-1, 1), 76.51736068725586 + random(-1, 1));
+vertex(325.0138883590698 + random(-1, 1), 77.51736068725586 + random(-1, 1));
+vertex(325.0138883590698 + random(-1, 1), 77.51736068725586 + random(-1, 1));
+vertex(329.0138883590698 + random(-1, 1), 80.51736068725586 + random(-1, 1));
+vertex(330.0138883590698 + random(-1, 1), 83.51736068725586 + random(-1, 1));
+endShape(CLOSE);
+          strokeVar(0, 0, 0); // negro
+          beginShape();//sombrero
+vertex(247 + random(-1, 1), 70.1875 + random(-1, 1));
+vertex(246 + random(-1, 1), 70.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 70.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 70.1875 + random(-1, 1));
+vertex(242 + random(-1, 1), 69.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 68.1875 + random(-1, 1));
+vertex(239 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(235 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(235 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(233 + random(-1, 1), 66.1875 + random(-1, 1));
+vertex(231 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(229 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(228 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(226 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(225 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(224 + random(-1, 1), 61.1875 + random(-1, 1));
+vertex(222 + random(-1, 1), 60.1875 + random(-1, 1));
+vertex(222 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(224 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(226 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(227 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(230 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(232 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(233 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(235 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(236 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(237 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(239 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(242 + random(-1, 1), 57.1875 + random(-1, 1));
+vertex(243 + random(-1, 1), 56.1875 + random(-1, 1));
+vertex(244 + random(-1, 1), 56.1875 + random(-1, 1));
+vertex(245 + random(-1, 1), 55.1875 + random(-1, 1));
+vertex(246 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 52.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 50.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 46.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 43.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 40.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 37.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 34.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 30.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 28.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 26.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 25.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 23.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 22.1875 + random(-1, 1));
+vertex(249 + random(-1, 1), 20.1875 + random(-1, 1));
+vertex(249 + random(-1, 1), 18.1875 + random(-1, 1));
+vertex(250 + random(-1, 1), 17.1875 + random(-1, 1));
+vertex(251 + random(-1, 1), 15.1875 + random(-1, 1));
+vertex(252 + random(-1, 1), 13.1875 + random(-1, 1));
+vertex(254 + random(-1, 1), 11.1875 + random(-1, 1));
+vertex(257 + random(-1, 1), 9.1875 + random(-1, 1));
+vertex(260 + random(-1, 1), 7.1875 + random(-1, 1));
+vertex(262 + random(-1, 1), 6.1875 + random(-1, 1));
+vertex(265 + random(-1, 1), 5.1875 + random(-1, 1));
+vertex(268 + random(-1, 1), 4.1875 + random(-1, 1));
+vertex(273 + random(-1, 1), 4.1875 + random(-1, 1));
+vertex(276 + random(-1, 1), 3.1875 + random(-1, 1));
+vertex(280 + random(-1, 1), 3.1875 + random(-1, 1));
+vertex(283 + random(-1, 1), 2.1875 + random(-1, 1));
+vertex(287 + random(-1, 1), 2.1875 + random(-1, 1));
+vertex(290 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(292 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(295 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(299 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(302 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(305 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(308 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(310 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(312 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(313 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(315 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(318 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(320 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(320 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(322 + random(-1, 1), 1.1875 + random(-1, 1));
+vertex(324 + random(-1, 1), 2.1875 + random(-1, 1));
+vertex(326 + random(-1, 1), 2.1875 + random(-1, 1));
+vertex(327 + random(-1, 1), 2.1875 + random(-1, 1));
+vertex(329 + random(-1, 1), 3.1875 + random(-1, 1));
+vertex(329 + random(-1, 1), 3.1875 + random(-1, 1));
+vertex(331 + random(-1, 1), 4.1875 + random(-1, 1));
+vertex(333 + random(-1, 1), 6.1875 + random(-1, 1));
+vertex(335 + random(-1, 1), 8.1875 + random(-1, 1));
+vertex(336 + random(-1, 1), 9.1875 + random(-1, 1));
+vertex(337 + random(-1, 1), 11.1875 + random(-1, 1));
+vertex(338 + random(-1, 1), 12.1875 + random(-1, 1));
+vertex(338 + random(-1, 1), 13.1875 + random(-1, 1));
+vertex(339 + random(-1, 1), 14.1875 + random(-1, 1));
+vertex(340 + random(-1, 1), 15.1875 + random(-1, 1));
+vertex(340 + random(-1, 1), 16.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 17.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 18.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 20.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 22.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 23.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 26.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 28.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 31.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 35.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 37.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 39.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 41.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 44.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 47.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 50.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 52.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 55.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 55.1875 + random(-1, 1));
+vertex(347 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(349 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(351 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(354 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(357 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(359 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(363 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(364 + random(-1, 1), 54.1875 + random(-1, 1));
+vertex(366 + random(-1, 1), 55.1875 + random(-1, 1));
+vertex(367 + random(-1, 1), 57.1875 + random(-1, 1));
+vertex(368 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(366 + random(-1, 1), 60.1875 + random(-1, 1));
+vertex(363 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(360 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(357 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(354 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(350 + random(-1, 1), 68.1875 + random(-1, 1));
+vertex(346 + random(-1, 1), 69.1875 + random(-1, 1));
+vertex(344 + random(-1, 1), 69.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 69.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 66.1875 + random(-1, 1));
+vertex(341 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(334 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(332 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(328 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(326 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(320 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(317 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(314 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(310 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(305 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(302 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(299 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(293 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(291 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(286 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(283 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(276 + random(-1, 1), 62.1875 + random(-1, 1));
+vertex(274 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(270 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(268 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(265 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(263 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(259 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(256 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(253 + random(-1, 1), 64.1875 + random(-1, 1));
+vertex(250 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 69.1875 + random(-1, 1));
+vertex(247 + random(-1, 1), 70.1875 + random(-1, 1));
+vertex(235 + random(-1, 1), 67.1875 + random(-1, 1));
+vertex(231 + random(-1, 1), 66.1875 + random(-1, 1));
+vertex(229 + random(-1, 1), 65.1875 + random(-1, 1));
+vertex(226 + random(-1, 1), 63.1875 + random(-1, 1));
+vertex(223 + random(-1, 1), 60.1875 + random(-1, 1));
+vertex(224 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(229 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(234 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(238 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(241 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(243 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(246 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(248 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(251 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(254 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(258 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(260 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(265 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(271 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(274 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(278 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(282 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(286 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(290 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(296 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(298 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(301 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(304 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(306 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(309 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(312 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(316 + random(-1, 1), 59.1875 + random(-1, 1));
+vertex(319 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(322 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(325 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(327 + random(-1, 1), 58.1875 + random(-1, 1));
+vertex(330 + random(-1, 1), 57.1875 + random(-1, 1));
+vertex(332 + random(-1, 1), 57.1875 + random(-1, 1));
+vertex(336 + random(-1, 1), 56.1875 + random(-1, 1));
+vertex(338 + random(-1, 1), 56.1875 + random(-1, 1));
+vertex(340 + random(-1, 1), 56.1875 + random(-1, 1));
+vertex(342 + random(-1, 1), 55.1875 + random(-1, 1));
+vertex(343 + random(-1, 1), 55.1875 + random(-1, 1));
+vertex(347 + random(-1, 1), 55.1875 + random(-1, 1));
+endShape(CLOSE);
+         fillVar(242, 228, 53); // groc 
+          strokeVar(242, 228, 53); // groc 
+          beginShape();//manzana de la cara
+vertex(293 + random(-1, 1), 81.171875 + random(-1, 1));
+vertex(290 + random(-1, 1), 81.171875 + random(-1, 1));
+vertex(287 + random(-1, 1), 81.171875 + random(-1, 1));
+vertex(286 + random(-1, 1), 82.171875 + random(-1, 1));
+vertex(284 + random(-1, 1), 83.171875 + random(-1, 1));
+vertex(282 + random(-1, 1), 84.171875 + random(-1, 1));
+vertex(281 + random(-1, 1), 87.171875 + random(-1, 1));
+vertex(281 + random(-1, 1), 88.171875 + random(-1, 1));
+vertex(278 + random(-1, 1), 89.171875 + random(-1, 1));
+vertex(278 + random(-1, 1), 89.171875 + random(-1, 1));
+vertex(277 + random(-1, 1), 90.171875 + random(-1, 1));
+vertex(277 + random(-1, 1), 91.171875 + random(-1, 1));
+vertex(277 + random(-1, 1), 91.171875 + random(-1, 1));
+vertex(277 + random(-1, 1), 94.171875 + random(-1, 1));
+vertex(274 + random(-1, 1), 94.171875 + random(-1, 1));
+vertex(272 + random(-1, 1), 96.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 98.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 98.171875 + random(-1, 1));
+vertex(269 + random(-1, 1), 99.171875 + random(-1, 1));
+vertex(270 + random(-1, 1), 101.171875 + random(-1, 1));
+vertex(270 + random(-1, 1), 103.171875 + random(-1, 1));
+vertex(270 + random(-1, 1), 103.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 106.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 106.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 107.171875 + random(-1, 1));
+vertex(267 + random(-1, 1), 107.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 108.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 109.171875 + random(-1, 1));
+vertex(269 + random(-1, 1), 110.171875 + random(-1, 1));
+vertex(271 + random(-1, 1), 111.171875 + random(-1, 1));
+vertex(271 + random(-1, 1), 114.171875 + random(-1, 1));
+vertex(270 + random(-1, 1), 115.171875 + random(-1, 1));
+vertex(269 + random(-1, 1), 117.171875 + random(-1, 1));
+vertex(269 + random(-1, 1), 118.171875 + random(-1, 1));
+vertex(269 + random(-1, 1), 121.171875 + random(-1, 1));
+vertex(269 + random(-1, 1), 122.171875 + random(-1, 1));
+vertex(271 + random(-1, 1), 123.171875 + random(-1, 1));
+vertex(271 + random(-1, 1), 123.171875 + random(-1, 1));
+vertex(272 + random(-1, 1), 123.171875 + random(-1, 1));
+vertex(274 + random(-1, 1), 124.171875 + random(-1, 1));
+vertex(276 + random(-1, 1), 128.171875 + random(-1, 1));
+vertex(278 + random(-1, 1), 130.171875 + random(-1, 1));
+vertex(278 + random(-1, 1), 130.171875 + random(-1, 1));
+vertex(279 + random(-1, 1), 131.171875 + random(-1, 1));
+vertex(279 + random(-1, 1), 131.171875 + random(-1, 1));
+vertex(279 + random(-1, 1), 131.171875 + random(-1, 1));
+vertex(282 + random(-1, 1), 130.171875 + random(-1, 1));
+vertex(285 + random(-1, 1), 129.171875 + random(-1, 1));
+vertex(287 + random(-1, 1), 131.171875 + random(-1, 1));
+vertex(289 + random(-1, 1), 133.171875 + random(-1, 1));
+vertex(292 + random(-1, 1), 134.171875 + random(-1, 1));
+vertex(293 + random(-1, 1), 135.171875 + random(-1, 1));
+vertex(297 + random(-1, 1), 133.171875 + random(-1, 1));
+vertex(298 + random(-1, 1), 132.171875 + random(-1, 1));
+vertex(299 + random(-1, 1), 131.171875 + random(-1, 1));
+vertex(305 + random(-1, 1), 132.171875 + random(-1, 1));
+vertex(311 + random(-1, 1), 132.171875 + random(-1, 1));
+vertex(312 + random(-1, 1), 131.171875 + random(-1, 1));
+vertex(313 + random(-1, 1), 128.171875 + random(-1, 1));
+vertex(313 + random(-1, 1), 124.171875 + random(-1, 1));
+vertex(314 + random(-1, 1), 121.171875 + random(-1, 1));
+vertex(319 + random(-1, 1), 119.171875 + random(-1, 1));
+vertex(321 + random(-1, 1), 117.171875 + random(-1, 1));
+vertex(320 + random(-1, 1), 115.171875 + random(-1, 1));
+vertex(319 + random(-1, 1), 113.171875 + random(-1, 1));
+vertex(317 + random(-1, 1), 109.171875 + random(-1, 1));
+vertex(319 + random(-1, 1), 107.171875 + random(-1, 1));
+vertex(319 + random(-1, 1), 106.171875 + random(-1, 1));
+vertex(321 + random(-1, 1), 102.171875 + random(-1, 1));
+vertex(321 + random(-1, 1), 99.171875 + random(-1, 1));
+vertex(320 + random(-1, 1), 98.171875 + random(-1, 1));
+vertex(319 + random(-1, 1), 98.171875 + random(-1, 1));
+vertex(316 + random(-1, 1), 97.171875 + random(-1, 1));
+vertex(317 + random(-1, 1), 92.171875 + random(-1, 1));
+vertex(317 + random(-1, 1), 91.171875 + random(-1, 1));
+vertex(313 + random(-1, 1), 87.171875 + random(-1, 1));
+vertex(310 + random(-1, 1), 87.171875 + random(-1, 1));
+vertex(307 + random(-1, 1), 87.171875 + random(-1, 1));
+vertex(305 + random(-1, 1), 83.171875 + random(-1, 1));
+vertex(303 + random(-1, 1), 82.171875 + random(-1, 1));
+vertex(297 + random(-1, 1), 82.171875 + random(-1, 1));
+vertex(297 + random(-1, 1), 78.171875 + random(-1, 1));
+vertex(297 + random(-1, 1), 75.171875 + random(-1, 1));
+vertex(298 + random(-1, 1), 68.171875 + random(-1, 1));
+vertex(298 + random(-1, 1), 61.171875 + random(-1, 1));
+vertex(298 + random(-1, 1), 53.171875 + random(-1, 1));
+vertex(296 + random(-1, 1), 54.171875 + random(-1, 1));
+vertex(294 + random(-1, 1), 57.171875 + random(-1, 1));
+vertex(291 + random(-1, 1), 60.171875 + random(-1, 1));
+vertex(291 + random(-1, 1), 66.171875 + random(-1, 1));
+vertex(289 + random(-1, 1), 68.171875 + random(-1, 1));
+vertex(285 + random(-1, 1), 72.171875 + random(-1, 1));
+vertex(282 + random(-1, 1), 73.171875 + random(-1, 1));
+vertex(272 + random(-1, 1), 73.171875 + random(-1, 1));
+vertex(267 + random(-1, 1), 72.171875 + random(-1, 1));
+vertex(259 + random(-1, 1), 68.171875 + random(-1, 1));
+vertex(257 + random(-1, 1), 67.171875 + random(-1, 1));
+vertex(257 + random(-1, 1), 64.171875 + random(-1, 1));
+vertex(259 + random(-1, 1), 64.171875 + random(-1, 1));
+vertex(260 + random(-1, 1), 64.171875 + random(-1, 1));
+vertex(263 + random(-1, 1), 65.171875 + random(-1, 1));
+vertex(270 + random(-1, 1), 65.171875 + random(-1, 1));
+vertex(283 + random(-1, 1), 62.171875 + random(-1, 1));
+vertex(288 + random(-1, 1), 59.171875 + random(-1, 1));
+vertex(293 + random(-1, 1), 58.171875 + random(-1, 1));
+vertex(295 + random(-1, 1), 51.171875 + random(-1, 1));
+vertex(288 + random(-1, 1), 51.171875 + random(-1, 1));
+vertex(281 + random(-1, 1), 46.171875 + random(-1, 1));
+vertex(280 + random(-1, 1), 43.171875 + random(-1, 1));
+vertex(277 + random(-1, 1), 39.171875 + random(-1, 1));
+vertex(272 + random(-1, 1), 36.171875 + random(-1, 1));
+vertex(261 + random(-1, 1), 34.171875 + random(-1, 1));
+vertex(256 + random(-1, 1), 32.171875 + random(-1, 1));
+vertex(254 + random(-1, 1), 33.171875 + random(-1, 1));
+vertex(260 + random(-1, 1), 35.171875 + random(-1, 1));
+vertex(264 + random(-1, 1), 37.171875 + random(-1, 1));
+vertex(265 + random(-1, 1), 40.171875 + random(-1, 1));
+vertex(268 + random(-1, 1), 45.171875 + random(-1, 1));
+vertex(271 + random(-1, 1), 49.171875 + random(-1, 1));
+vertex(276 + random(-1, 1), 51.171875 + random(-1, 1));
+vertex(283 + random(-1, 1), 51.171875 + random(-1, 1));
+vertex(290 + random(-1, 1), 51.171875 + random(-1, 1));
+vertex(297 + random(-1, 1), 49.171875 + random(-1, 1));
+vertex(299 + random(-1, 1), 44.171875 + random(-1, 1));
+vertex(299 + random(-1, 1), 47.171875 + random(-1, 1));
+vertex(300 + random(-1, 1), 49.171875 + random(-1, 1));
+vertex(305 + random(-1, 1), 50.171875 + random(-1, 1));
+vertex(312 + random(-1, 1), 49.171875 + random(-1, 1));
+vertex(316 + random(-1, 1), 44.171875 + random(-1, 1));
+vertex(326 + random(-1, 1), 40.171875 + random(-1, 1));
+vertex(333 + random(-1, 1), 39.171875 + random(-1, 1));
+vertex(338 + random(-1, 1), 40.171875 + random(-1, 1));
+vertex(343 + random(-1, 1), 39.171875 + random(-1, 1));
+vertex(335 + random(-1, 1), 45.171875 + random(-1, 1));
+vertex(328 + random(-1, 1), 48.171875 + random(-1, 1));
+vertex(317 + random(-1, 1), 48.171875 + random(-1, 1));
+vertex(312 + random(-1, 1), 50.171875 + random(-1, 1));
+vertex(309 + random(-1, 1), 52.171875 + random(-1, 1));
+vertex(305 + random(-1, 1), 53.171875 + random(-1, 1));
+vertex(302 + random(-1, 1), 53.171875 + random(-1, 1));
+vertex(307 + random(-1, 1), 57.171875 + random(-1, 1));
+vertex(309 + random(-1, 1), 58.171875 + random(-1, 1));
+vertex(315 + random(-1, 1), 59.171875 + random(-1, 1));
+vertex(318 + random(-1, 1), 59.171875 + random(-1, 1));
+vertex(327 + random(-1, 1), 61.171875 + random(-1, 1));
+vertex(331 + random(-1, 1), 64.171875 + random(-1, 1));
+vertex(333 + random(-1, 1), 67.171875 + random(-1, 1));
+vertex(338 + random(-1, 1), 73.171875 + random(-1, 1));
+vertex(339 + random(-1, 1), 77.171875 + random(-1, 1));
+vertex(329 + random(-1, 1), 77.171875 + random(-1, 1));
+vertex(325 + random(-1, 1), 77.171875 + random(-1, 1));
+vertex(320 + random(-1, 1), 76.171875 + random(-1, 1));
+vertex(316 + random(-1, 1), 76.171875 + random(-1, 1));
+vertex(315 + random(-1, 1), 75.171875 + random(-1, 1));
+vertex(311 + random(-1, 1), 72.171875 + random(-1, 1));
+vertex(309 + random(-1, 1), 66.171875 + random(-1, 1));
+vertex(306 + random(-1, 1), 60.171875 + random(-1, 1));
+vertex(302 + random(-1, 1), 57.171875 + random(-1, 1));
+vertex(299 + random(-1, 1), 55.171875 + random(-1, 1));
+endShape(CLOSE);
+          break;
 
-        
+        case 'disgusted':
+          stroke(0,150,0,150); // verd
+          beginShape();
+          for (let i = 0; i < 12; i++) {
+            let angle = map(i, 0, 12, 0, TWO_PI);
+            let r = 75 + random(-50, 50) * intensity;
+            let x = VIRTUAL_W/2 + r * cos(angle);
+            let y = VIRTUAL_H/2 + r * sin(angle);
+            vertex(x, y);
+          }
+          endShape(CLOSE);
+          break;
 
         default:
           stroke(150,150,150,150); // gris suau
@@ -2584,4 +3171,3 @@ function fillVar(r, g, b) {
 
 </script>
 </body>
-</html>
